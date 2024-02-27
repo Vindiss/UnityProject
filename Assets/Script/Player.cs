@@ -31,8 +31,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vert = Input.GetAxis("Vertical");
-        hor = Input.GetAxis("Horizontal");
+        vert = Input.GetAxis(VerticalAxis);
+        hor = Input.GetAxis(HorizontalAxis);
 
         transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
     }
