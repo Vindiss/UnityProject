@@ -7,29 +7,38 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private float speed; 
+    [SerializeField] private float MoveForce;
+    [SerializeField] private float AngularSpeed;
+
+    [SerializeField] private string VerticalAxis;
+    [SerializeField] private string HorizontalAxis;
+
+    private Rigidbody rb;
+    private float vert;
+    private float hor;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        float vert = Input.GetAxis("Vertical");
-        float hor = Input.GetAxis("Horizontal");
+        vert = Input.GetAxis("Vertical");
+        hor = Input.GetAxis("Horizontal");
 
-        transform.position += speed * Time.deltaTime * vert * transform.forward;
-        transform.Rotate(transform.up, 90 * hor * Time.deltaTime);
+        transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void FixedUpdate()
     {
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.Log( contact.normal);
-        }
+        rb.AddForce(MoveForce * vert * transform.forward);
     }
 }
