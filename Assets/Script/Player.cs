@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private string VerticalAxis;
     [SerializeField] private string HorizontalAxis;
+    [SerializeField, Range(0, 100)] private float Energy = 33;
 
     private Rigidbody rb;
     private float vert;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     {
         vert = Input.GetAxis(VerticalAxis);
         hor = Input.GetAxis(HorizontalAxis);
+        Energy += Time.deltaTime;
 
         transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
     }
