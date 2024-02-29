@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
         EnergySlider.value = Energy;
 
         transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
+
         if(Energy > 0 && sprint>0)
         {
             ActualMoveForce = SprintMoveForce;
