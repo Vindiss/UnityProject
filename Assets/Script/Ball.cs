@@ -9,7 +9,6 @@ public class Ball : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        Debug.Log(rb);
     }
     // Start is called before the first frame update
     void Start()

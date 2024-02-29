@@ -18,10 +18,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-    private void Awake()
-    {
-        Reset();
-    }
     public static GameManager Instance()
     {
         if (instance == null)
@@ -38,13 +34,12 @@ public class GameManager : MonoBehaviour
         player2.transform.rotation = Player2PositionReset.rotation;
         player2.transform.position = Player2PositionReset.position;
         ball.transform.position = BallPositionReset.position;
-        Debug.Log(ball);
         ball.ResetBall();
     }
 
     void Start()
     {
-        
+        Reset();
     }
 
     // Update is called once per frame

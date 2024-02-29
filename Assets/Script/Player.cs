@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
         Energy += Time.deltaTime;
 
         transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
+        Debug.Log(FindAnyObjectByType<Ball>().GetComponent<Rigidbody>().velocity);
     }
 
     private void FixedUpdate()
