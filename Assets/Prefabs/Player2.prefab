@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 1357175324325438877, guid: 57c735e48fd1a5746a7943766066d085,
         type: 3}
       propertyPath: m_Name
-      value: Player2 Variant
+      value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 3674291104524313835, guid: 57c735e48fd1a5746a7943766066d085,
         type: 3}
@@ -67,6 +67,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026142107387079940, guid: 57c735e48fd1a5746a7943766066d085,
+        type: 3}
+      propertyPath: JumpAxis
+      value: JumpAxis2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026142107387079940, guid: 57c735e48fd1a5746a7943766066d085,
+        type: 3}
+      propertyPath: SprintAxis
+      value: SprintAxis2
       objectReference: {fileID: 0}
     - target: {fileID: 9026142107387079940, guid: 57c735e48fd1a5746a7943766066d085,
         type: 3}
