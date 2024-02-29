@@ -1,17 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
+using System.Timers;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] Transform Player1PositionReset;
-    [SerializeField] Transform Player2PositionReset;
-    [SerializeField] Transform BallPositionReset;
-    [SerializeField] Player player1;
-    [SerializeField] Player player2;
-    [SerializeField] Ball ball;
+    [SerializeField] private Transform Player1PositionReset;
+    [SerializeField] private Transform Player2PositionReset;
+    [SerializeField] private Transform BallPositionReset;
+    [SerializeField] private Player player1;
+    [SerializeField] private Player player2;
+    [SerializeField] private Ball ball;
+
+    public GameObject TextScorePlayer1;
+    public GameObject TextScorePlayer2;
 
     public int PlayerScore1 = 0;
     public int PlayerScore2 = 0;
@@ -42,7 +49,6 @@ public class GameManager : MonoBehaviour
         Reset();
     }
 
-    // Update is called once per frame
     void Update()
     {
         

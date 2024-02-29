@@ -17,9 +17,8 @@ public class Ball : MonoBehaviour
     }
     public void ResetBall()
     {
-        Debug.Log(rb.velocity);
         rb.velocity = Vector3.zero;
-        Debug.Log(rb.velocity);
+        rb.angularVelocity = Vector3.zero;
     }
 
     // Update is called once per frame
