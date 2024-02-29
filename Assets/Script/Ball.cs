@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        Debug.Log(rb);
     }
     // Start is called before the first frame update
     void Start()
@@ -17,11 +18,13 @@ public class Ball : MonoBehaviour
     }
     public void ResetBall()
     {
-        rb.velocity  = Vector3.zero;
+        Debug.Log(rb.velocity);
+        rb.velocity = Vector3.zero;
+        Debug.Log(rb.velocity);
     }
+
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

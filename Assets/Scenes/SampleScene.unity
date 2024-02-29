@@ -158,6 +158,8 @@ MonoBehaviour:
   player1: {fileID: 461759616}
   player2: {fileID: 534363454}
   ball: {fileID: 414177218}
+  PlayerScore1: 0
+  PlayerScore2: 0
 --- !u!4 &284913200
 Transform:
   m_ObjectHideFlags: 0
@@ -228,13 +230,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375924484}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0.6427876, z: 0, w: 0.7660445}
   m_LocalPosition: {x: -38.25, y: 4.81, z: 4.7477417}
   m_LocalScale: {x: 2662.0999, y: 158.72499, z: 369.509}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 80, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,13 +391,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443100198}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: -0.6427876, z: 0, w: 0.7660445}
   m_LocalPosition: {x: 51.46, y: 4.3858976, z: 5.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -80, z: 0}
 --- !u!114 &461759616 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9026142107387079940, guid: 57c735e48fd1a5746a7943766066d085,
@@ -477,6 +479,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 931337733745780797}
     m_Modifications:
+    - target: {fileID: 53595191388569557, guid: d45744f6a07b4b248851c25a5fdaf440,
+        type: 3}
+      propertyPath: player
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6198899015386922075, guid: d45744f6a07b4b248851c25a5fdaf440,
         type: 3}
       propertyPath: m_Name
@@ -615,6 +622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5203382203552545105, guid: 1daa965846e2a8c45bc03d34c3cb6163,
+        type: 3}
+      propertyPath: player
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

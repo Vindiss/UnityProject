@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Player player2;
     [SerializeField] Ball ball;
 
+    public int PlayerScore1 = 0;
+    public int PlayerScore2 = 0;
+
     public static GameManager instance;
 
     private void Awake()
@@ -35,6 +38,7 @@ public class GameManager : MonoBehaviour
         player2.transform.rotation = Player2PositionReset.rotation;
         player2.transform.position = Player2PositionReset.position;
         ball.transform.position = BallPositionReset.position;
+        Debug.Log(ball);
         ball.ResetBall();
     }
 
