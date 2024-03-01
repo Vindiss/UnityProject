@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         player2.transform.rotation = Player2PositionReset.rotation;
         player2.transform.position = Player2PositionReset.position;
         ball.transform.position = BallPositionReset.position;
+        ball.transform.localScale = BallPositionReset.localScale;
         ball.ResetBall();
     }
 
