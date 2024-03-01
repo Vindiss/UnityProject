@@ -1,17 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
+using System.Timers;
+using UnityEditor;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] Transform Player1PositionReset;
-    [SerializeField] Transform Player2PositionReset;
-    [SerializeField] Transform BallPositionReset;
-    [SerializeField] Player player1;
-    [SerializeField] Player player2;
-    [SerializeField] Ball ball;
+    [SerializeField] private Transform Player1PositionReset;
+    [SerializeField] private Transform Player2PositionReset;
+    [SerializeField] private Transform BallPositionReset;
+    [SerializeField] private Player player1;
+    [SerializeField] private Player player2;
+    [SerializeField] private Ball ball;
+
+    public GameObject TextGameTimer;
+    public GameObject TextScorePlayer1;
+    public GameObject TextScorePlayer2;
+    public GameObject TextForGameAnnouncement;
+
+    private Timer GameTimerIntervalle;
+    public int GameTimer;
 
     public int PlayerScore1 = 0;
     public int PlayerScore2 = 0;
@@ -27,6 +40,8 @@ public class GameManager : MonoBehaviour
         return instance;
     }
 
+    public Ball GetBall() { return ball; }
+
     public void Reset()
     {
         player1.transform.position = Player1PositionReset.position;
@@ -39,12 +54,23 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        GameTimerIntervalle = new Timer(1000);
+        GameTimerIntervalle.Elapsed += OnTimedEvent;
+        GameTimerIntervalle.Start();
+        GameTimer = 120;
+        TextGameTimer.GetComponent<TextMeshProUGUI>().SetText($"{GameTimer / 60}:{GameTimer % 60}");
+        TextScorePlayer1.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore1}");
+        TextScorePlayer2.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore2}");
         Reset();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        TextGameTimer.GetComponent<TextMeshProUGUI>().SetText($"{GameTimer / 60}:{(GameTimer % 60):D2}");
     }
+
+    private void OnTimedEvent(object sender, ElapsedEventArgs e)
+    {
+        GameTimer--;
+    }   
 }
