@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Timers;
 using UnityEditor;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,8 +18,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player2;
     [SerializeField] private Ball ball;
 
+    public GameObject TextGameTimer;
     public GameObject TextScorePlayer1;
     public GameObject TextScorePlayer2;
+    public GameObject TextForGameAnnouncement;
+
+    private Timer GameTimerIntervalle;
+    public int GameTimer;
 
     public int PlayerScore1 = 0;
     public int PlayerScore2 = 0;
@@ -34,6 +40,8 @@ public class GameManager : MonoBehaviour
         return instance;
     }
 
+    public Ball GetBall() { return ball; }
+
     public void Reset()
     {
         player1.transform.position = Player1PositionReset.position;
@@ -46,11 +54,23 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        GameTimerIntervalle = new Timer(1000);
+        GameTimerIntervalle.Elapsed += OnTimedEvent;
+        GameTimerIntervalle.Start();
+        GameTimer = 120;
+        TextGameTimer.GetComponent<TextMeshProUGUI>().SetText($"{GameTimer / 60}:{GameTimer % 60}");
+        TextScorePlayer1.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore1}");
+        TextScorePlayer2.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore2}");
         Reset();
     }
 
     void Update()
     {
-        
+        TextGameTimer.GetComponent<TextMeshProUGUI>().SetText($"{GameTimer / 60}:{(GameTimer % 60):D2}");
     }
+
+    private void OnTimedEvent(object sender, ElapsedEventArgs e)
+    {
+        GameTimer--;
+    }   
 }

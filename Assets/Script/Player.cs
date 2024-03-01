@@ -72,5 +72,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb.AddForce(ActualMoveForce * vert * transform.forward);
+
+       /* Physics.Raycast()*/
     }
 }
