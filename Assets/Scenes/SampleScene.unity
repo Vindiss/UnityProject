@@ -123,12 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &191182057 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 859828038854967829, guid: 2477e7b576622ef48add9a9fa73f54cd,
-    type: 3}
-  m_PrefabInstance: {fileID: 7530688168958873461}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1902343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,6 +240,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 816236573}
+--- !u!1 &191182057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 859828038854967829, guid: 2477e7b576622ef48add9a9fa73f54cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 7530688168958873461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &284913198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,6 +1294,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7098078789186506514, guid: 96168296b72ede94ea8f21186472ade2,
+        type: 3}
+      propertyPath: BallAxisPlayer1
+      value: BallAxis1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098078789186506514, guid: 96168296b72ede94ea8f21186472ade2,
+        type: 3}
+      propertyPath: BallAxisPlayer2
+      value: BallAxis2
+      objectReference: {fileID: 0}
     - target: {fileID: 8519944645321261078, guid: 96168296b72ede94ea8f21186472ade2,
         type: 3}
       propertyPath: m_Name
@@ -1668,6 +1678,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9026142107387079940, guid: 57c735e48fd1a5746a7943766066d085,
         type: 3}
+      propertyPath: BallAxis
+      value: BallAxis1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9026142107387079940, guid: 57c735e48fd1a5746a7943766066d085,
+        type: 3}
       propertyPath: EnergySlider
       value: 
       objectReference: {fileID: 776877792}
@@ -1702,6 +1717,11 @@ PrefabInstance:
       propertyPath: m_Cameras.Array.data[0]
       value: 
       objectReference: {fileID: 359600395}
+    - target: {fileID: 1185389088556666026, guid: feaddcbaa201c974ab0189b9a58a249c,
+        type: 3}
+      propertyPath: BallAxis
+      value: BallAxis2
+      objectReference: {fileID: 0}
     - target: {fileID: 1185389088556666026, guid: feaddcbaa201c974ab0189b9a58a249c,
         type: 3}
       propertyPath: EnergySlider

@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] private string BallAxisPlayer1;
+    [SerializeField] private string BallAxisPlayer2;
+
+
     private Rigidbody rb;
+    private bool lauchBallPlayer1;
+    private bool lauchBallPlayer2;
 
     public Rigidbody GetRB() {  return rb; }
     void Awake()
@@ -26,12 +32,24 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            rb.AddForce(collision.gameObject.GetComponent<Rigidbody>().velocity * 2);
+            Vector3 playervel = collision.gameObject.GetComponent<Rigidbody>().velocity;
+            float playerEner = collision.gameObject.GetComponent<Player>().GetEnergy();
+            if (lauchBallPlayer1 == true || lauchBallPlayer2  == true)
+            {
+                rb.AddForce(playervel * playerEner / 30);
+                collision.gameObject.GetComponent<Player>().SetEnergy(0);
+            }
+            else
+            {
+                rb.AddForce(playervel * 2);
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        lauchBallPlayer1 = Input.GetButton(BallAxisPlayer1);
+        lauchBallPlayer2 = Input.GetButton(BallAxisPlayer2);
     }
 }
