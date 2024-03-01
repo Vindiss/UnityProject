@@ -12,14 +12,20 @@ public class Ball : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    {
-        
+    { 
     }
     public void ResetBall()
     {
-        Debug.Log(rb.velocity);
         rb.velocity = Vector3.zero;
-        Debug.Log(rb.velocity);
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            rb.AddForce(collision.gameObject.GetComponent<Rigidbody>().velocity * 2);
+        }
     }
 
     // Update is called once per frame
