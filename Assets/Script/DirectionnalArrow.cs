@@ -9,8 +9,8 @@ public class DirectionnalArrow : MonoBehaviour
 
     private void Update()
     {
-        Vector3 targetPosition = target.transform.position;
-        targetPosition.x = transform.position.x;
-        transform.LookAt(targetPosition);
+        transform.LookAt(target);
+        Vector3 relativepos = target.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(relativepos, Vector3.up) * Quaternion.Euler(0, 92, 0);
     }
 }
