@@ -8,11 +8,14 @@ public class Goal : MonoBehaviour
 {
     [SerializeField]  private PlayerEnum player;
 
+
+    private bool haveGoal;
     private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameManager.Instance();
+        haveGoal = false;
     }
 
     // Update is called once per frame
@@ -23,12 +26,13 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ball"))
+        if (other.CompareTag("Ball") && !haveGoal)
         {
             gameManager.GetBall().GetRB().isKinematic = true;
             if (player == PlayerEnum.Player1)
             {
                 gameManager.PlayerScore1 += 1;
+                haveGoal = true;
                 gameManager.TextScorePlayer1.GetComponent<TextMeshProUGUI>().SetText($"{gameManager.PlayerScore1}");
                 gameManager.TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().SetText("Player 1 Scored !");
                 StartCoroutine(GoalAnimation());
@@ -36,6 +40,7 @@ public class Goal : MonoBehaviour
             else
             {
                 gameManager.PlayerScore2 += 1;
+                haveGoal = true;
                 gameManager.TextScorePlayer2.GetComponent<TextMeshProUGUI>().SetText($"{gameManager.PlayerScore2}");
                 gameManager.TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().SetText("Player 2 Scored !");
                 StartCoroutine(GoalAnimation());
@@ -51,6 +56,7 @@ public class Goal : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         gameManager.TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().SetText("");
-        GameManager.Instance().Reset();
+        gameManager.Reset();
+        haveGoal = false;
     }
 }
