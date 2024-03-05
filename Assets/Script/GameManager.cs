@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         TextGameTimer.GetComponent<TextMeshProUGUI>().SetText($"{GameTimer / 60}:{GameTimer % 60}");
         TextScorePlayer1.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore1}");
         TextScorePlayer2.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore2}");
+        FindAnyObjectByType<Obstacles>().Generate();
         Reset();
     }
 

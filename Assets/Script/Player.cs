@@ -26,6 +26,16 @@ public class Player : MonoBehaviour
     private float sprint;
     private float jump;
 
+    public float GetEnergy()
+    {
+        return Energy;
+    }
+    public void SetEnergy(float new_Energy)
+    {
+        Energy = new_Energy;
+    }
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -68,6 +78,15 @@ public class Player : MonoBehaviour
             ActualMoveForce = WalkMoveForce;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(rb.velocity * 2);
+        }
+    }
+
 
     private void FixedUpdate()
     {
