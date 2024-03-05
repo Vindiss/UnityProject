@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private string JumpAxis;
     [SerializeField, Range(0, 100)] private float Energy = 33;
     [SerializeField] private Slider EnergySlider;
+    [SerializeField] private AnimationCurve JumpConsumption;
 
     private Rigidbody rb;
     private float ActualMoveForce;
@@ -66,9 +67,7 @@ public class Player : MonoBehaviour
         }
         EnergySlider.value = Energy;
 
-        transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
-
-        if(Energy > 0 && sprint>0)
+        if(Energy > 0 && sprint > 0)
         {
             ActualMoveForce = SprintMoveForce;
             Energy -=  Time.deltaTime * 20;
@@ -77,6 +76,8 @@ public class Player : MonoBehaviour
         {
             ActualMoveForce = WalkMoveForce;
         }
+
+        transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -91,6 +92,11 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb.AddForce(ActualMoveForce * vert * transform.forward);
+
+        if(jump > 0)
+        {
+            
+        }
 
        /* Physics.Raycast()*/
     }
