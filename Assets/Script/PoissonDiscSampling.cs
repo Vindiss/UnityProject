@@ -22,7 +22,6 @@ public static class PoissonDiscSampling
                 float angle = Random.value * Mathf.PI * 2;
                 Vector3 dir = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
                 Vector3 candidate = spawnCentre + dir * Random.Range(minDistance, 2 * minDistance);
-                //candidate.x = regionSize.x;
 
                 if (IsValid(candidate, regionSize, minDistance, points))
                 {
