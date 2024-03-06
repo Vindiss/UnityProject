@@ -19,14 +19,19 @@ public class Obstacles : MonoBehaviour
 
     public void Generate()
     {
-        Vector3 regionSize = new Vector3((LevelWidth - (LevelWidth*0.5f)), 8.7f, (LevelHeight-(LevelHeight*0.5f)));
+        Vector3 regionSize = new Vector3((LevelWidth-(LevelWidth*0.5f)), 5.88f, (LevelHeight-(LevelHeight*0.5f)));
 
         points.Clear();
         List<Vector3> spawnPoints = PoissonDiscSampling.GeneratePoints(minDistance, regionSize, testBeforeNext);
 
+        while (spawnPoints.Count == 0)
+        {
+           spawnPoints = PoissonDiscSampling.GeneratePoints(minDistance, regionSize, testBeforeNext);
+        }
+
         foreach (Vector3 point in spawnPoints)
         {
-            int obstacleRandom = Random.Range(1,4);
+            int obstacleRandom = Random.Range(1,5);
             if (points.Count < obstacleCount)
             {
                 if (obstacleRandom == 1)
@@ -64,7 +69,6 @@ public class Obstacles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Generate();
     }
 
     // Update is called once per frame
