@@ -56,7 +56,14 @@ public class Goal : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         gameManager.TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().SetText("");
-        gameManager.Reset();
+        if (gameManager.Overtime)
+        {
+            gameManager.Result();
+        }
+        else
+        {
+            gameManager.Reset();
+        }
         haveGoal = false;
     }
 }

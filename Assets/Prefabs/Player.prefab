@@ -280,9 +280,16 @@ MonoBehaviour:
   WalkMoveForce: 23
   SprintMoveForce: 40
   AngularSpeed: 20
+  JumpForce: 20
   VerticalAxis: VerticalAxis1
   HorizontalAxis: HorizontalAxis1
   SprintAxis: SprintAxis1
   JumpAxis: JumpAxis1
   Energy: 33
   EnergySlider: {fileID: 0}
+  JumpConsumption:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -6,10 +6,12 @@ using System;
 using System.Timers;
 using UnityEditor;
 using TMPro;
+using Unity.VisualScripting;
+using System.Drawing;
+using UnityEditor.SearchService;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
 
     [SerializeField] private Transform Player1PositionReset;
     [SerializeField] private Transform Player2PositionReset;
@@ -18,13 +20,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player2;
     [SerializeField] private Ball ball;
 
+    [SerializeField] private GameObject ResultUI;
+    [SerializeField] private GameObject ResultScorePlayer1Text;
+    [SerializeField] private GameObject ResultScorePlayer2Text;
+    [SerializeField] private GameObject ResultWinnerText;
+
     public GameObject TextGameTimer;
     public GameObject TextScorePlayer1;
     public GameObject TextScorePlayer2;
     public GameObject TextForGameAnnouncement;
 
-    private Timer GameTimerIntervalle;
+    private System.Timers.Timer GameTimerIntervalle;
     public int GameTimer;
+    public bool Overtime;
+    public bool GameEnd;
 
     public int PlayerScore1 = 0;
     public int PlayerScore2 = 0;
@@ -55,10 +64,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        GameTimerIntervalle = new Timer(1000);
+       /* ResultUI.SetActive(false);*/
+        GameTimerIntervalle = new System.Timers.Timer(1000);
         GameTimerIntervalle.Elapsed += OnTimedEvent;
         GameTimerIntervalle.Start();
-        GameTimer = 120;
+        GameTimer = 15;
+        Overtime = false;
+        GameEnd = false;
         TextGameTimer.GetComponent<TextMeshProUGUI>().SetText($"{GameTimer / 60}:{GameTimer % 60}");
         TextScorePlayer1.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore1}");
         TextScorePlayer2.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore2}");
@@ -73,6 +85,56 @@ public class GameManager : MonoBehaviour
 
     private void OnTimedEvent(object sender, ElapsedEventArgs e)
     {
-        GameTimer--;
+        if (Overtime)
+        {
+            GameTimer++;
+        }
+        else
+        {
+            GameTimer--;
+        }
+        if( GameTimer == 0 )
+        {
+            if(PlayerScore1 != PlayerScore2)
+            {
+                Result();
+            }
+            else
+            {
+                Overtime = true;
+                TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().text = "Overtime !";
+                Invoke(TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().text = "Overtime !", 2f);
+                Reset();
+            }
+        }
     }   
+
+    public void Result()
+    {
+        ResultUI.SetActive(true);
+        ResultScorePlayer1Text.GetComponent<TextMeshProUGUI>().text = $"{PlayerScore1}";
+        ResultScorePlayer2Text.GetComponent<TextMeshProUGUI>().text = $"{PlayerScore2}";
+        if (PlayerScore1 > PlayerScore2)
+        {
+            ResultWinnerText.GetComponent<TextMeshProUGUI>().text = "Player1 Wins";
+            ResultWinnerText.GetComponent<TextMeshProUGUI>().color = TextScorePlayer1.GetComponent<TextMeshProUGUI>().color;
+        }
+        else
+        {
+            ResultWinnerText.GetComponent<TextMeshProUGUI>().text = "Player2 Wins";
+            ResultWinnerText.GetComponent<TextMeshProUGUI>().color = TextScorePlayer2.GetComponent<TextMeshProUGUI>().color;
+        }
+
+        GameEnd = true;
+        ball.GetRB().isKinematic = true;
+    }
+
+    void StopGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
 }
