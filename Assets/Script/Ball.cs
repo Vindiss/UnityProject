@@ -19,17 +19,19 @@ public class Ball : MonoBehaviour
     }
     // Start is called before the first frame update
     void Start()
-    { 
+    {
     }
     public void ResetBall()
     {
         rb.isKinematic = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+        GetComponent<ParticleSystem>().Stop();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        GetComponent<ParticleSystem>().Play();
         if (collision.gameObject.CompareTag("Player"))
         {
             Vector3 playervel = collision.gameObject.GetComponent<Rigidbody>().velocity;
