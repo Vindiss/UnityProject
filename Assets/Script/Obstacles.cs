@@ -19,7 +19,7 @@ public class Obstacles : MonoBehaviour
 
     public void Generate()
     {
-        Vector3 regionSize = new Vector3((LevelWidth-(LevelWidth*0.5f)), 5.88f, (LevelHeight-(LevelHeight*0.5f)));
+        Vector3 regionSize = new Vector3(LevelWidth , 5.88f, (LevelHeight - (LevelHeight *0.5f)));
 
         points.Clear();
         List<Vector3> spawnPoints = PoissonDiscSampling.GeneratePoints(minDistance, regionSize, testBeforeNext);
