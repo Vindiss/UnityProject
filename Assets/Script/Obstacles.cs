@@ -16,17 +16,19 @@ public class Obstacles : MonoBehaviour
     [SerializeField] private int testBeforeNext;
 
     List<Vector3> points = new List<Vector3>();
+    public Vector3 CentreRegion;
 
     public void Generate()
     {
-        Vector3 regionSize = new Vector3(LevelWidth , 5.88f, (LevelHeight - (LevelHeight *0.5f)));
+        Vector3 regionSize = new Vector3(LevelWidth , 5.75f, LevelHeight);
+        CentreRegion = transform.position;
 
         points.Clear();
-        List<Vector3> spawnPoints = PoissonDiscSampling.GeneratePoints(minDistance, regionSize, testBeforeNext);
+        List<Vector3> spawnPoints = PoissonDiscSampling.GeneratePoints(minDistance, regionSize, testBeforeNext, CentreRegion);
 
         while (spawnPoints.Count == 0)
         {
-           spawnPoints = PoissonDiscSampling.GeneratePoints(minDistance, regionSize, testBeforeNext);
+           spawnPoints = PoissonDiscSampling.GeneratePoints(minDistance, regionSize, testBeforeNext, CentreRegion);
         }
 
         foreach (Vector3 point in spawnPoints)

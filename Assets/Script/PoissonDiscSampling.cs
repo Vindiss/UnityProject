@@ -4,12 +4,12 @@ using UnityEngine;
 
 public static class PoissonDiscSampling
 {
-    public static List<Vector3> GeneratePoints(float minDistance, Vector3 regionSize, int testBeforeNext)
+    public static List<Vector3> GeneratePoints(float minDistance, Vector3 regionSize, int testBeforeNext, Vector3 CentreRegion)
     {
         List<Vector3> points = new List<Vector3>();
         List<Vector3> spawnPoints = new List<Vector3>();
 
-        spawnPoints.Add(regionSize / 2);
+        spawnPoints.Add(CentreRegion);
 
         while (spawnPoints.Count > 0)
         {
@@ -22,8 +22,9 @@ public static class PoissonDiscSampling
                 float angle = Random.value * Mathf.PI * 2;
                 Vector3 dir = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle));
                 Vector3 candidate = spawnCentre + dir * Random.Range(minDistance, 2 * minDistance);
+                candidate.y = 2.9f;
 
-                if (IsValid(candidate, regionSize, minDistance, points))
+                if (IsValid(candidate, regionSize, minDistance, points, CentreRegion))
                 {
                     points.Add(candidate);
                     spawnPoints.Add(candidate);
@@ -41,9 +42,9 @@ public static class PoissonDiscSampling
         return points;
     }
 
-    static bool IsValid(Vector3 candidate, Vector3 regionSize, float minDistance, List<Vector3> points)
+    static bool IsValid(Vector3 candidate, Vector3 regionSize, float minDistance, List<Vector3> points, Vector3 CentreRegion)
     {
-        if (candidate.x >= 0 && candidate.x < regionSize.x && candidate.z >= 0 && candidate.z < regionSize.z)
+        if (candidate.x >= CentreRegion.x - (regionSize.x/2) && candidate.x < CentreRegion.x + (regionSize.x / 2) && candidate.z >= CentreRegion.z - (regionSize.z / 2) && candidate.z < CentreRegion.z + (regionSize.z / 2))
         {
             foreach (Vector3 point in points)
             {

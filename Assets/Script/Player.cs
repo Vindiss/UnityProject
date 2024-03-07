@@ -102,7 +102,6 @@ public class Player : MonoBehaviour
                 cam.fieldOfView -= 0.25f;
             }
         }
-        Debug.Log(rb.velocity);
         transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
     }
 
