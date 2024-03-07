@@ -9,8 +9,8 @@ public class Ball : MonoBehaviour
 
 
     private Rigidbody rb;
-    private bool lauchBallPlayer1;
-    private bool lauchBallPlayer2;
+    private float lauchBallPlayer1;
+    private float lauchBallPlayer2;
 
     public Rigidbody GetRB() {  return rb; }
     void Awake()
@@ -36,7 +36,7 @@ public class Ball : MonoBehaviour
         {
             Vector3 playervel = collision.gameObject.GetComponent<Rigidbody>().velocity;
             float playerEner = collision.gameObject.GetComponent<Player>().GetEnergy();
-            if (lauchBallPlayer1 == true || lauchBallPlayer2  == true)
+            if (lauchBallPlayer1 > 0 || lauchBallPlayer2 > 0)
             {
                 rb.AddForce(playervel * playerEner / 30);
                 collision.gameObject.GetComponent<Player>().SetEnergy(0);
@@ -58,7 +58,7 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lauchBallPlayer1 = Input.GetButton(BallAxisPlayer1);
-        lauchBallPlayer2 = Input.GetButton(BallAxisPlayer2);
+        lauchBallPlayer1 = Input.GetAxis(BallAxisPlayer1);
+        lauchBallPlayer2 = Input.GetAxis(BallAxisPlayer2);
     }
 }
