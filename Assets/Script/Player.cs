@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
 
         if (Energy + Time.deltaTime < 100 )
         {
-            Energy += Time.deltaTime * 5;
+            Energy += Time.deltaTime * 7;
         }
         else
         {
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         if(Energy > 0 && sprint > 0 && jump == 0)
         {
             ActualMoveForce = SprintMoveForce;
-            Energy -=  Time.deltaTime * 20;
+            Energy -=  Time.deltaTime * 25;
             if(cam.fieldOfView < 100)
             {
                 cam.fieldOfView += 0.25f;
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
                 cam.fieldOfView -= 0.25f;
             }
         }
-
+        Debug.Log(rb.velocity);
         transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
     }
 
@@ -110,12 +110,13 @@ public class Player : MonoBehaviour
     {
 
         RaycastHit hitInfo;
-        if (jump > 0)
+        if (jump > 0 && Energy > 0 && sprint == 0)
         {
             rb.drag = 0.001f;
             rb.AddForce(ActualMoveForce * vert * transform.forward / 1800);
             rb.AddForce(JumpForce * Vector3.up * jump * JumpConsumption.Evaluate(jumpTime));
-
+            
+            Energy -= Time.deltaTime * 40;
             jumpTime += Time.deltaTime;
         }
         else

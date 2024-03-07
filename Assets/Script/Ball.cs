@@ -43,7 +43,14 @@ public class Ball : MonoBehaviour
             }
             else
             {
-                rb.AddForce(playervel * 2);
+                if(playervel.x > 12 || playervel.y > 12 || playervel.z > 12)
+                {
+                    rb.AddForce(playervel / 100);
+                }
+                else
+                {
+                    rb.AddForce(playervel);
+                }
             }
         }
     }
