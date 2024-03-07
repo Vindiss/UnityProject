@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.GameEnd)
+        if (gameManager.GameEnd || gameManager.KickOff || !gameManager.GameStart)
         {
             vert = 0; 
             hor = 0;
@@ -74,21 +74,24 @@ public class Player : MonoBehaviour
             sprint = Input.GetAxis(SprintAxis);
             jump = Input.GetAxis(JumpAxis);
         }
-
-        if (Energy + Time.deltaTime < 100 )
+        if (gameManager.GameStart)
         {
-            Energy += Time.deltaTime * 7;
+            if (Energy + Time.deltaTime < 100)
+            {
+                Energy += Time.deltaTime * 7;
+            }
+            else
+            {
+                Energy = 100;
+            }
+            EnergySlider.value = Energy;
         }
-        else
-        {
-            Energy = 100;
-        }
-        EnergySlider.value = Energy;
+        
 
         if(Energy > 0 && sprint > 0 && jump == 0)
         {
             ActualMoveForce = SprintMoveForce;
-            Energy -=  Time.deltaTime * 25;
+            Energy -=  Time.deltaTime * 30;
             if(cam.fieldOfView < 100)
             {
                 cam.fieldOfView += 0.25f;
@@ -102,7 +105,6 @@ public class Player : MonoBehaviour
                 cam.fieldOfView -= 0.25f;
             }
         }
-        Debug.Log(rb.velocity);
         transform.Rotate(transform.up, AngularSpeed * 10 * hor * Time.deltaTime);
     }
 
@@ -116,12 +118,13 @@ public class Player : MonoBehaviour
             rb.AddForce(ActualMoveForce * vert * transform.forward / 1800);
             rb.AddForce(JumpForce * Vector3.up * jump * JumpConsumption.Evaluate(jumpTime));
             
-            Energy -= Time.deltaTime * 40;
+            Energy -= Time.deltaTime * 45;
             jumpTime += Time.deltaTime;
         }
         else
         {
             rb.AddForce(ActualMoveForce * vert * transform.forward);
+            rb.drag = 1.8f;
             if (Physics.Raycast(transform.position, -transform.up, out hitInfo))
             {
                 if (transform.position.y - hitInfo.transform.position.y < 1.25f)

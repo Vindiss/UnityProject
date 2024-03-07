@@ -29,6 +29,7 @@ public class Goal : MonoBehaviour
         if (other.CompareTag("Ball") && !haveGoal)
         {
             gameManager.GetBall().GetRB().isKinematic = true;
+            gameManager.GetGameTimerIntervalle().Stop();
             if (player == PlayerEnum.Player1)
             {
                 gameManager.PlayerScore1 += 1;
@@ -63,6 +64,7 @@ public class Goal : MonoBehaviour
         else
         {
             gameManager.Reset();
+            gameManager.Kickoff();
         }
         haveGoal = false;
     }
