@@ -9,6 +9,7 @@ using TMPro;
 using Unity.VisualScripting;
 using System.Drawing;
 using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-       /* ResultUI.SetActive(false);*/
+        ResultUI.SetActive(false);
         GameTimerIntervalle = new System.Timers.Timer(1000);
         GameTimerIntervalle.Elapsed += OnTimedEvent;
         GameTimerIntervalle.Start();
@@ -74,13 +75,26 @@ public class GameManager : MonoBehaviour
         TextGameTimer.GetComponent<TextMeshProUGUI>().SetText($"{GameTimer / 60}:{GameTimer % 60}");
         TextScorePlayer1.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore1}");
         TextScorePlayer2.GetComponent<TextMeshProUGUI>().SetText($"{PlayerScore2}");
-        FindAnyObjectByType<Obstacles>().Generate();
         Reset();
     }
 
     void Update()
     {
         TextGameTimer.GetComponent<TextMeshProUGUI>().SetText($"{GameTimer / 60}:{(GameTimer % 60):D2}");
+        if (GameTimer == 0)
+        {
+            if (PlayerScore1 != PlayerScore2)
+            {
+                Result();
+            }
+            else
+            {
+                Overtime = true;
+                TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().SetText("Overtime !");
+                Invoke(nameof(ClearGameAnnouncement), 2f);
+                Reset();
+            }
+        }
     }
 
     private void OnTimedEvent(object sender, ElapsedEventArgs e)
@@ -92,20 +106,6 @@ public class GameManager : MonoBehaviour
         else
         {
             GameTimer--;
-        }
-        if( GameTimer == 0 )
-        {
-            if(PlayerScore1 != PlayerScore2)
-            {
-                Result();
-            }
-            else
-            {
-                Overtime = true;
-                TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().text = "Overtime !";
-                Invoke(TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().text = "Overtime !", 2f);
-                Reset();
-            }
         }
     }   
 
@@ -125,11 +125,23 @@ public class GameManager : MonoBehaviour
             ResultWinnerText.GetComponent<TextMeshProUGUI>().color = TextScorePlayer2.GetComponent<TextMeshProUGUI>().color;
         }
 
+        GameTimerIntervalle.Stop();
         GameEnd = true;
         ball.GetRB().isKinematic = true;
     }
 
-    void StopGame()
+    public void ClearGameAnnouncement()
+    {
+        TextForGameAnnouncement.GetComponent<TextMeshProUGUI>().SetText("");
+    }
+
+    public void RestartGame()
+    {
+        UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+    }
+
+    public void StopGame()
     {
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
