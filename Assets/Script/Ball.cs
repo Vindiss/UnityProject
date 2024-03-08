@@ -45,11 +45,11 @@ public class Ball : MonoBehaviour
             {
                 if(playervel.x > 12 || playervel.y > 12 || playervel.z > 12)
                 {
-                    rb.AddForce(playervel / 100);
+                    rb.AddForce(playervel / 50);
                 }
                 else
                 {
-                    rb.AddForce(playervel);
+                    rb.AddForce(playervel * 2);
                 }
             }
         }

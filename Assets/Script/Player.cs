@@ -132,12 +132,4 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ball"))
-        {
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(rb.velocity * 2);
-        }
-    }
 }
