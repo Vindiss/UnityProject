@@ -1,14 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System;
 using System.Timers;
-using UnityEditor;
 using TMPro;
 using Unity.VisualScripting;
-using System.Drawing;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -76,7 +70,6 @@ public class GameManager : MonoBehaviour
         GameTimerIntervalle = new System.Timers.Timer(1000);
         GameTimerIntervalle.Elapsed += OnTimedEvent;
         GameTimerIntervalle.Start();
-        GameTimer = 15;
         Overtime = false;
         GameStart = true;
         GameEnd = false;
@@ -187,7 +180,6 @@ public class GameManager : MonoBehaviour
         float enter = 0;
         while (enter == 0)
         {
-            Debug.Log(enter);
             enter = Input.GetAxis("LaunchGame");
 
             yield return new WaitForNextFrameUnit();

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -78,7 +77,7 @@ public class Player : MonoBehaviour
         {
             if (Energy + Time.deltaTime < 100)
             {
-                Energy += Time.deltaTime * 7;
+                Energy += Time.deltaTime * 9;
             }
             else
             {
@@ -124,7 +123,6 @@ public class Player : MonoBehaviour
         else
         {
             rb.AddForce(ActualMoveForce * vert * transform.forward);
-            rb.drag = 1.8f;
             if (Physics.Raycast(transform.position, -transform.up, out hitInfo))
             {
                 if (transform.position.y - hitInfo.transform.position.y < 1.25f)

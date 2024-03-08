@@ -38,14 +38,14 @@ public class Ball : MonoBehaviour
             float playerEner = collision.gameObject.GetComponent<Player>().GetEnergy();
             if (lauchBallPlayer1 > 0 || lauchBallPlayer2 > 0)
             {
-                rb.AddForce(playervel * playerEner / 30);
+                rb.AddForce(playervel * playerEner / 10);
                 collision.gameObject.GetComponent<Player>().SetEnergy(0);
             }
             else
             {
                 if(playervel.x > 12 || playervel.y > 12 || playervel.z > 12)
                 {
-                    rb.AddForce(playervel);
+                    rb.AddForce(playervel / 100);
                 }
                 else
                 {

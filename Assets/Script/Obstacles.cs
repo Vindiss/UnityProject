@@ -14,6 +14,7 @@ public class Obstacles : MonoBehaviour
     [SerializeField] private float minDistance;
     [SerializeField] private int obstacleCount;
     [SerializeField] private int testBeforeNext;
+    [SerializeField] private  GameObject material;
 
     List<Vector3> points = new List<Vector3>();
     public Vector3 CentreRegion;
@@ -40,23 +41,27 @@ public class Obstacles : MonoBehaviour
                 {
                     GameObject obstacle = Instantiate(obstacles1, point, (Quaternion.identity * Quaternion.Euler(-90, 0, 0)));
                     obstacle.transform.SetParent(transform);
+                    obstacle.GetComponent<MeshRenderer>().material = material.GetComponent<MeshRenderer>().material;
                     points.Add(point);
                 }
                 else if (obstacleRandom == 2)
                 {
                     GameObject obstacle = Instantiate(obstacles2, point, (Quaternion.identity * Quaternion.Euler(-90, 0, 0)));
+                    obstacle.GetComponent<MeshRenderer>().material = material.GetComponent<MeshRenderer>().material;
                     obstacle.transform.SetParent(transform);
                     points.Add(point);
                 }
                 else if (obstacleRandom == 3)
                 {
                     GameObject obstacle = Instantiate(obstacles3, point, (Quaternion.identity * Quaternion.Euler(-90, 0, 0)));
+                    obstacle.GetComponent<MeshRenderer>().material = material.GetComponent<MeshRenderer>().material;
                     obstacle.transform.SetParent(transform);
                     points.Add(point);
                 }
                 else if (obstacleRandom == 4)
                 {
                     GameObject obstacle = Instantiate(obstacles4, point, (Quaternion.identity * Quaternion.Euler(-90, 0, 0)));
+                    obstacle.GetComponent<MeshRenderer>().material = material.GetComponent<MeshRenderer>().material;
                     obstacle.transform.SetParent(transform);
                     points.Add(point);
                 }
